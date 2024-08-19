@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -30,17 +32,17 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_18
+        targetCompatibility = JavaVersion.VERSION_18
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "18"
     }
     buildFeatures {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.4.1"
     }
     packaging {
         resources {
@@ -66,4 +68,18 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    // ViewModel Compose
+    implementation (libs.androidx.lifecycle.viewmodel.compose.v241)
+
+    //Dagger - Hilt
+    implementation (libs.hilt.android.v244)
+    kapt (libs.hilt.android.compiler.v244)
+    kapt (libs.androidx.hilt.compiler.v100)
+    implementation (libs.androidx.hilt.navigation.compose.v100)
+
+    // Retrofit
+    implementation (libs.retrofit)
+    implementation (libs.okhttp)
 }
+
